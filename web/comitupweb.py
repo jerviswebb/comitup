@@ -66,6 +66,19 @@ def do_connect(ssid, password, log):
     ciu_client.ciu_connect(ssid, password)  # type: ignore
 
 
+def get_zt_id():
+    with open("/var/lib/zerotier-one/identity.public") as f:
+        return f.readline().split(":")[0]
+
+
+def get_cpu_id():
+    with open("/proc/cpuinfo") as f:
+        for line in f:
+            if line.startswith("Serial"):
+                return line.split(":")[1].strip()
+    return "unknown"
+
+
 @cached(cache=ttl_cache)
 def cached_points():
     return ciu_client.ciu_points()  # type: ignore
@@ -87,8 +100,16 @@ def create_app(log):
                 point["ssid"]
             )
         log.info("index.html - {} points".format(len(points)))
+        # get zt_id with `cat /var/lib/zerotier-one/identity.public | cut -d ':' -f1`
+        # get cpu_id with `cat /proc/cpuinfo | grep Serial | awk '{print $3}'`
+        zt_id = get_zt_id()
+        cpu_id = get_cpu_id()
         return render_template(
-            "index.html", points=points, can_blink=ciu.can_blink()
+            "index.html",
+            points=points,
+            can_blink=ciu.can_blink(),
+            zt_id=zt_id,
+            cpu_id=cpu_id,
         )
 
     @app.route("/confirm")
