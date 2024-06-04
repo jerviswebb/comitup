@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  configure)
+    if [ -e /var/lib/comitup/comitup.json.save ] ; then
+      mv -f /var/lib/comitup/comitup.json.save /var/lib/comitup/comitup.json
+    fi
+
+    if [ -e /etc/NetworkManager/dnsmasq-shared.d/nm-dns-sabotage.conf ] ; then
+      rm -f /etc/NetworkManager/dnsmasq-shared.d/nm-dns-sabotage.conf
+    fi
+
+    systemctl unmask comitup
+    systemctl enable comitup
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

@@ -1,0 +1,14 @@
+Test-Command: py.test-3 test/test_config.py test/test_persist.py test/test_web*
+Features: test-name=pytest
+Depends:
+    @,
+    @builddeps@,
+    libcairo2-dev,
+    gobject-introspection,
+    libgirepository1.0-dev,
+    python3-dev,
+    libdbus-glib-1-dev,
+    libdbus-1-dev
+
+Tests: fileloc
+Depends: @, bash

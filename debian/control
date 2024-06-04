@@ -1,0 +1,45 @@
+Source: comitup
+Section: net
+Priority: optional
+Maintainer: David Steele <steele@debian.org>
+Build-Depends:
+    debhelper-compat (=12),
+    pybuild-plugin-pyproject,
+    dh-python,
+    python3,
+    python3-setuptools,
+    python3-pytest,
+    python3-pytest-runner,
+    python3-mock,
+    python3-dbus,
+    python3-cachetools,
+    pandoc,
+    python3-flask,
+    python3-gi,
+Standards-Version: 4.5.1
+Rules-Requires-Root: binary-targets
+Homepage: https://davesteele.github.io/comitup/
+Vcs-Git: https://github.com/davesteele/comitup.git -b debian
+Vcs-Browser: https://github.com/davesteele/comitup
+
+Package: comitup
+Architecture: all
+Depends:
+    ${python3:Depends},
+    ${misc:Depends},
+    systemd,
+    python3-networkmanager (>= 2.1-1),
+    python3-pkg-resources,
+    python3-gi,
+    python3-flask,
+    python3-dbus,
+    python3-cachetools,
+    iw,
+    dnsmasq-base,
+    avahi-daemon,
+    iptables,
+Suggests: python3-tabulate
+Description: bootstrap Wi-Fi using Wi-Fi
+ Comitup will attempt to connect to Wi-Fi using an established connection. If
+ that fails, it creates a hotspot and web service to aid in configuring a
+ connection.
