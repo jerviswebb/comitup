@@ -65,7 +65,7 @@ def check_environment(log: logging.Logger) -> None:
                     "networking services",
                 ]:
                     print(msg)
-                    log.warn(msg)
+                    log.warning(msg)
         except Exception:
             pass
 
@@ -164,6 +164,8 @@ def main():
 
     try:
         loop.run()
+    except KeyboardInterrupt:
+        pass
     except Exception:
         log.error("Terminal exception encountered")
         raise
