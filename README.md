@@ -42,9 +42,12 @@ ls # you'll see a .deb file in the directory!
 
 ## Installing the deb Package
 
+Skip the first command if you've just built the .deb on your device.
+
 ### Debian 11 (bullseye) (OLD RPi OS)
 
 ```bash
+curl -O https://github.com/jerviswebb/comitup/releases/download/1.39-bullseye-dmca/comitup_1.39-1_all.deb
 sudo dpkg -i comitup_1.39-1_all.deb
 sudo apt-get install -f # to install missing dependencies reported by dpkg
 sudo systemctl enable NetworkManager.service
@@ -57,6 +60,7 @@ sudo reboot now # reboot the system to apply the changes
 ### Debian 12 (bookworm) (RPi OS)
 
 ```bash
+curl -O https://github.com/jerviswebb/comitup/releases/download/1.43-bookworm-dmca/comitup_1.43-1_all.deb
 sudo dpkg -i comitup_1.43-1_all.deb
 sudo apt-get install -f # to install missing dependencies reported by dpkg
 sudo systemctl enable NetworkManager.service
