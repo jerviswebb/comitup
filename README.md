@@ -42,12 +42,12 @@ ls # you'll see a .deb file in the directory!
 
 ## Installing the deb Package
 
-Skip the first command if you've just built the .deb on your device.
+Skip the first command if you've just built the .deb on your device. Note the web portal will fail to run without zerotier installed as the identity file necessary to render the page is missing.
 
 ### Debian 11 (bullseye) (OLD RPi OS)
 
 ```bash
-curl -O https://github.com/jerviswebb/comitup/releases/download/1.39-bullseye-dmca/comitup_1.39-1_all.deb
+curl -O -L https://github.com/jerviswebb/comitup/releases/download/1.39-bullseye-dmca/comitup_1.39-1_all.deb
 sudo dpkg -i comitup_1.39-1_all.deb
 sudo apt-get install -f # to install missing dependencies reported by dpkg
 sudo systemctl enable NetworkManager.service
@@ -60,7 +60,11 @@ sudo reboot now # reboot the system to apply the changes
 ### Debian 12 (bookworm) (RPi OS)
 
 ```bash
-curl -O https://github.com/jerviswebb/comitup/releases/download/1.43-bookworm-dmca/comitup_1.43-1_all.deb
+curl -O -L https://github.com/jerviswebb/comitup/releases/download/1.43-bookworm-dmca/comitup_1.43-1_all.deb
+echo -e "deb http://davesteele.github.io/comitup/repo comitup main" | sudo tee -a /etc/apt/sources.list
+wget https://davesteele.github.io/key-366150CE.pub.txt
+sudo apt-key add key-366150CE.pub.txt
+sudo apt-get update
 sudo dpkg -i comitup_1.43-1_all.deb
 sudo apt-get install -f # to install missing dependencies reported by dpkg
 sudo systemctl enable NetworkManager.service
