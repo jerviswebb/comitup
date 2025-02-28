@@ -28,7 +28,7 @@ ls  # you'll now see a .deb file in the directory!
 
 ```bash
 git clone https://github.com/jerviswebb/comitup.git
-tar czvf comitup_1.39.orig.tar.gz comitup
+tar czvf comitup_1.43.orig.tar.gz comitup
 cd comitup
 echo -e "deb http://davesteele.github.io/comitup/repo comitup main" | sudo tee -a /etc/apt/sources.list
 wget https://davesteele.github.io/key-366150CE.pub.txt
@@ -43,7 +43,7 @@ ls # you'll see a .deb file in the directory!
 ## Installing the deb Package
 
 ```bash
-sudo dpkg -i comitup_1.39-1_all.deb
+sudo dpkg -i comitup_1.<version>-1_all.deb
 sudo apt-get install -f # to install missing dependencies reported by dpkg
 sudo systemctl enable NetworkManager.service
 sudo sed -i '$ s/^/#/' /etc/network/interfaces # comment out the import line in /etc/network/interfaces to allow NetworkManager to manage the interfaces
